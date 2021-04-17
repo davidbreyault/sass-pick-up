@@ -1,0 +1,64 @@
+@mixin fccc($disp: flex, $fl-dir: column, $jc: center, $ai: center) {
+	display: $disp;
+	flex-direction: $fl-dir;
+	justify-content: $jc;
+	align-items: $ai;
+}
+
+@mixin card($width: 40rem, $border-radius: 2rem, $btn-bg: #3a3a3a) {
+    width: $width;
+    border-radius: $border-radius;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .3);
+    .card-img {
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 1rem;
+        border-top-right-radius: $border-radius $border-radius;
+        border-top-left-radius: $border-radius $border-radius;
+        border-bottom-right-radius: 0 0;
+        border-bottom-left-radius: 0 0;
+    }
+    .card-content {
+        @include fccc(flex, column, center, start);
+        padding: 2rem;
+        border-radius: $border-radius;
+        p {
+            margin: 2rem 0;
+        }
+        .card-link {
+            position: relative;
+            z-index: 0;
+            padding: 1rem 2rem;
+            background-color: #fff;
+            color: #000;
+            border-radius: 2em;
+            text-decoration: none;
+            align-self: flex-end;
+            overflow: hidden;
+            &::after {
+                content: '';
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 2em;
+                background-color: $btn-bg;
+                transform: translateX(-64%);
+                transition: all .7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+            span {
+                mix-blend-mode: difference;
+                color: #fff;
+            }
+            &:hover {
+                &::after {
+                    transform: translateX(0%);
+                }
+            }
+        }
+    }
+}
